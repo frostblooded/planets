@@ -23,4 +23,4 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		attraction += direction * attraction_strength
 	
 	var normalized_attraction: Vector3 = attraction.normalized()
-	state.linear_velocity += normalized_attraction * state.step
+	state.linear_velocity += normalized_attraction
