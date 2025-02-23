@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://eo3dca7kyrmv"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_3j7hj"]
 [ext_resource type="PackedScene" uid="uid://kaackxw50p0t" path="res://scenes/planet.tscn" id="2_hda4l"]
 [ext_resource type="PackedScene" uid="uid://c5goslkr15sab" path="res://scenes/camera_gimble.tscn" id="3_catij"]
 [ext_resource type="Texture2D" uid="uid://q666k4vdajyu" path="res://textures/grid_cell.png" id="4_owc2k"]
+[ext_resource type="Script" path="res://scripts/controls.gd" id="5_5w412"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_eoqvc"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -24,7 +24,6 @@ uv1_scale = Vector3(1000, 1000, 1000)
 size = Vector2(1000, 1000)
 
 [node name="Main" type="Node3D"]
-script = ExtResource("1_3j7hj")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
@@ -35,13 +34,18 @@ environment = SubResource("Environment_1qv6r")
 
 [node name="Planet 1" parent="." instance=ExtResource("2_hda4l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.74309, 0, 0)
+initial_velocity = Vector3(1, 1, 1)
 
 [node name="Planet 2" parent="." instance=ExtResource("2_hda4l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.03211, 0)
+initial_velocity = Vector3(3, -2, 2)
 
 [node name="Planet 3" parent="." instance=ExtResource("2_hda4l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.3896)
+initial_velocity = Vector3(-2, 3, 1)
 
 [node name="CameraGimble" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("3_catij")]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 0.901016, 0.433785, 0, -0.433785, 0.901016, 0, 3.08825, 5.4066)
 follow_target = NodePath("../Planet 1")
 
@@ -49,3 +53,8 @@ follow_target = NodePath("../Planet 1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = SubResource("StandardMaterial3D_ekegv")
 mesh = SubResource("PlaneMesh_iehc3")
+
+[node name="Controls" type="Node" parent="." node_paths=PackedStringArray("camera")]
+process_mode = 3
+script = ExtResource("5_5w412")
+camera = NodePath("../CameraGimble")

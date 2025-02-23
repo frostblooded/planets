@@ -5,6 +5,7 @@ extends Node3D
 @export var follow_target: Node3D
 
 var initial_offset: Vector3
+var mouse_input_enabled: bool = true
 
 func _ready() -> void:
 	initial_offset = global_position
@@ -17,9 +18,12 @@ func _process(_delta: float) -> void:
 		global_position = follow_target.global_position + initial_offset
 
 func _input(event: InputEvent) -> void:
+	if !mouse_input_enabled:
+		return
+
 	var input_event_mouse_motion: InputEventMouseMotion = event as InputEventMouseMotion
 
 	if input_event_mouse_motion:
-		var move_strenght: float = 0.01
+		var move_strenght: float = 0.003
 		rotate_object_local(Vector3(1, 0, 0), - input_event_mouse_motion.relative.y * move_strenght)
 		global_rotate(Vector3(0, 1, 0), - input_event_mouse_motion.relative.x * move_strenght)
