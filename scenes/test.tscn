@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://cd6yy42laisle"]
+
+[ext_resource type="PackedScene" uid="uid://c5goslkr15sab" path="res://scenes/camera_gimble.tscn" id="1_8asru"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_bxelf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0uv0a"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_8ftln"]
+sky_material = SubResource("ProceduralSkyMaterial_0uv0a")
+
+[sub_resource type="Environment" id="Environment_u1v3n"]
+background_mode = 2
+sky = SubResource("Sky_8ftln")
+tonemap_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_l1qqi"]
+size = Vector2(100, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6ey6p"]
+
+[node name="Test" type="Node3D"]
+script = ExtResource("1_bxelf")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_u1v3n")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CameraGimble" parent="." instance=ExtResource("1_8asru")]
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_l1qqi")
+
+[node name="Cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_6ey6p")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://eo3dca7kyrmv"]
+[gd_scene load_steps=10 format=3 uid="uid://eo3dca7kyrmv"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_3j7hj"]
-[ext_resource type="Script" path="res://scripts/camera_gimble.gd" id="1_w88y1"]
 [ext_resource type="PackedScene" uid="uid://kaackxw50p0t" path="res://scenes/planet.tscn" id="2_hda4l"]
+[ext_resource type="PackedScene" uid="uid://c5goslkr15sab" path="res://scenes/camera_gimble.tscn" id="3_catij"]
+[ext_resource type="Texture2D" uid="uid://q666k4vdajyu" path="res://textures/grid_cell.png" id="4_owc2k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_eoqvc"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -14,6 +15,13 @@ sky_material = SubResource("ProceduralSkyMaterial_eoqvc")
 [sub_resource type="Environment" id="Environment_1qv6r"]
 sky = SubResource("Sky_872tu")
 tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ekegv"]
+albedo_texture = ExtResource("4_owc2k")
+uv1_scale = Vector3(1000, 1000, 1000)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_iehc3"]
+size = Vector2(1000, 1000)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_3j7hj")
@@ -29,16 +37,15 @@ environment = SubResource("Environment_1qv6r")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.74309, 0, 0)
 
 [node name="Planet 2" parent="." instance=ExtResource("2_hda4l")]
-initial_velocity = Vector3(0, -2, 0)
 
 [node name="Planet 3" parent="." instance=ExtResource("2_hda4l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.3896)
-initial_velocity = Vector3(-2, 0, 0)
 
-[node name="CameraGimble" type="Node3D" parent="."]
-script = ExtResource("1_w88y1")
+[node name="CameraGimble" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("3_catij")]
+transform = Transform3D(1, 0, 0, 0, 0.901016, 0.433785, 0, -0.433785, 0.901016, 0, 3.08825, 5.4066)
+follow_target = NodePath("../Planet 1")
 
-[node name="InnerGimbal" type="Node3D" parent="CameraGimble"]
-
-[node name="Camera" type="Camera3D" parent="CameraGimble/InnerGimbal"]
-transform = Transform3D(1, 0, 0, 0, 0.901016, 0.433785, 0, -0.433785, 0.901016, 0, 1.16491, 2.37577)
+[node name="StarsPlane" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = SubResource("StandardMaterial3D_ekegv")
+mesh = SubResource("PlaneMesh_iehc3")
