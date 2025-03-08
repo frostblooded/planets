@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://kaackxw50p0t" path="res://scenes/planet.tscn" id="2_hda4l"]
 [ext_resource type="PackedScene" uid="uid://c5goslkr15sab" path="res://scenes/camera_gimble.tscn" id="3_catij"]
 [ext_resource type="Texture2D" uid="uid://q666k4vdajyu" path="res://textures/grid_cell.png" id="4_owc2k"]
-[ext_resource type="Script" path="res://scripts/controls.gd" id="5_5w412"]
+[ext_resource type="Script" uid="uid://b2wdn624mdwxu" path="res://scripts/controls.gd" id="5_5w412"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_eoqvc"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)

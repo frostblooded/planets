@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5goslkr15sab"]
 
-[ext_resource type="Script" path="res://scripts/camera_gimble.gd" id="1_ywbgv"]
+[ext_resource type="Script" uid="uid://cbdxbgjpsxt4q" path="res://scripts/camera_gimble.gd" id="1_ywbgv"]
 
 [node name="Camera" type="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 0.901016, 0.433785, 0, -0.433785, 0.901016, 0, 1.16491, 2.37577)

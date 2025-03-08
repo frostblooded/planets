@@ -1,7 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://cd6yy42laisle"]
 
 [ext_resource type="PackedScene" uid="uid://c5goslkr15sab" path="res://scenes/camera_gimble.tscn" id="1_8asru"]
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_bxelf"]
+
+[sub_resource type="Resource" id="Resource_errlg"]
+metadata/__load_path__ = "res://scripts/main.gd"
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0uv0a"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -21,7 +23,7 @@ size = Vector2(100, 100)
 [sub_resource type="BoxMesh" id="BoxMesh_6ey6p"]
 
 [node name="Test" type="Node3D"]
-script = ExtResource("1_bxelf")
+script = SubResource("Resource_errlg")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_u1v3n")
